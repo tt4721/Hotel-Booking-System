@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+
+@model Hotel_Booking_System_Web.Models.WelcomeModel
+
+<header>
+    <div class="admin">
+        <h1>Logged in as, @ViewBag.UserEmailAdmin (admin)</h1>
+        <a class="logout-btn" href="@Url.Action("Logout", "Account")">LogOut</a>
+
+    </div>
+
+
+
+</header>
+
+
+
+
+<div class="menu">
+
+    <h1>Menu</h1>
+
+    <nav class="navigation-menu">
+
+        <button class="all-reservations-btn">All reservations</button>
+        <button class="add-admin-btn">Add admin</button>
+
+    </nav>
+</div>
+
+<div class="all-reservations">
+
+
+
+    <span class="icon-close">
+        <ion-icon name="close-outline"></ion-icon>
+    </span>
+
+
+
+    <div class="table">
+
+        <div class="row-header">
+            <div class="cell"> Reservation</div>
+            <div class="cell"> First Name </div>
+            <div class="cell"> Last Name</div>
+            <div class="cell"> Check In</div>
+            <div class="cell"> Check Out</div>
+            <div class="cell"> Room</div>
+            <div class="cell"> Phone</div>
+            <div class="cell"> Email </div>
+            <div class="cell"> Total Price </div>
+        </div>
+
+
+
+        <div class="table-body">
+
+            @if (Model.Reservations != null)
+            {
+                foreach (var reservation in Model.Reservations)
+                {
+
+
+                    <div class="row">
+
+                        <div class="cell" data-title="Reservation"> @reservation.Reservation_Id</div>
+
+                        <div class="cell" data-title="First Name"> @reservation.First_Name</div>
+
+                        <div class="cell" data-title="Last Name">@reservation.Last_Name</div>
+
+                        <div class="cell" data-title="Check In"> @reservation.Check_In.ToString("yyyy.dd.MM")</div>
+
+                        <div class="cell" data-title="Check Out"> @reservation.Check_Out.ToString("yyyy.dd.MM")</div>
+
+                        <div class="cell" data-title="Room"> @reservation.Room</div>
+
+                        <div class="cell" data-title="Phone"> @reservation.Phone</div>
+
+                        <div class="cell" data-title="Email"> @reservation.Email</div>
+
+                        <div class="cell" data-title="Total Price"> @reservation.Total_Price</div>
+
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="add-admin @(TempData["AddAdminSuccessMessage"]!= null ? "active" : "") || @(TempData["RemoveAdminSuccessMessage"] != null ? "active" : "")">
+
+
+
+    <span class="icon-close">
+        <ion-icon name="close-outline"></ion-icon>
+    </span>
+
+
+    <div class="table">
+
+        <div class="row-header">
+            <div class="cell"> Email</div>
+            <div class="cell"> Admin </div>
+            <div class="cell"> Add Admin </div>
+            <div class="cell"> Remove Admin</div>
+        </div>
+
+
+
+        <div class="table-body">
+
+            @if (Model.Accounts != null)
+            {
+                foreach (var account in Model.Accounts)
+                {
+
+
+                    <div class="row">
+
+                        <div class="cell" data-title="Email"> @account.User_Email</div>
+                        <div class="cell" data-title="Admin"> @account.Is_Admin</div>
+
+                        <form action="AddAdmin" method="post">
+                            <input type="hidden" name="User_Email" value="@account.User_Email" />
+                            <div class="cell" data-title="Add Admin">
+                                <button class="add-btn">Add</button>
+                            </div>
+                        </form>
+
+                        <form action="RemoveAdmin" method="post">
+                            <input type="hidden" name="User_Email" value="@account.User_Email" />
+                            <div class="cell" data-title="Remove Admin">
+                                <button class="remove-btn">Remove</button>
+                            </div>
+                        </form>
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+
+
+<script src="~/Java Script/scriptAdmin.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

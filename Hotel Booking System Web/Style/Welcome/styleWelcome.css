@@ -1,0 +1,970 @@
+﻿body {
+    display: flex;
+    background: linear-gradient(rgba(0,0,0,0.40),rgba(0,0,0,0.40)), url('backgroundHotel.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    z-index: 99;
+}
+
+
+
+/*.menu .navigation-menu .ion-icon {
+    color: #fff;
+    position: absolute;
+    left: 10px;
+    bottom: 37px;
+    font-size: 1.2em;
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    font-size: 1.2em;
+    color: #fff;
+    padding-top: 0px;
+
+}*/
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    padding-left: 50px;
+    margin-left: 200px;
+}
+
+.wlc {
+    padding-left: 20px;
+    display: flex;
+}
+
+    .wlc h1 {
+        color: #f5f5dc;
+        font-family: Arial;
+        font-size: 2.5em;
+    }
+
+
+    .wlc .logout-btn {
+        width: 130px;
+        height: 50px;
+        border: 2px solid #f5f5dc;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.1em;
+        color: #f5f5dc;
+        text-align: center;
+        transition: .5s;
+        margin-top: 25px;
+        margin-left: 1100px;
+        font-family: Arial;
+        line-height: 50px;
+        text-decoration: none;
+        position: absolute;
+    }
+
+        .wlc .logout-btn:hover {
+            background: #f5f5dc;
+            color: #6e2300;
+        }
+
+
+
+
+
+.menu {
+    position: fixed;
+    height: 100%;
+    width: 220px;
+    align-items: center;
+    box-sizing: border-box;
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-right: 2px solid rgba(255,255,255, .5);
+}
+
+
+
+    .menu h1 {
+        color: #f5f5dc;
+        font-family: Arial;
+        padding-left: 20px;
+    }
+
+.navigation-menu {
+    padding: 20px;
+    height: 305px;
+    width: 160px;
+}
+
+    .navigation-menu .reservation-btn {
+        width: 100%;
+        height: 40px;
+        display: block;
+        align-items: center;
+        margin-bottom: 25px;
+        background: transparent;
+        border: 2px solid #f5f5dc;
+        outline: none;
+        border-radius: 11px;
+        cursor: pointer;
+        font-size: 1.1em;
+        color: #f5f5dc;
+        transition: .5s;
+    }
+
+        .navigation-menu .reservation-btn:hover {
+            background: #f5f5dc;
+            color: #6e2300;
+        }
+
+    .navigation-menu .settings-btn {
+        width: 100%;
+        height: 40px;
+        display: block;
+        align-items: center;
+        margin-bottom: 25px;
+        background: transparent;
+        border: 2px solid #f5f5dc;
+        outline: none;
+        border-radius: 11px;
+        cursor: pointer;
+        font-size: 1.1em;
+        color: #f5f5dc;
+        transition: .5s;
+    }
+
+        .navigation-menu .settings-btn:hover {
+            background: #fff;
+            color: #6e2300;
+        }
+
+
+    .navigation-menu .room-btn {
+        width: 100%;
+        height: 40px;
+        display: block;
+        align-items: center;
+        margin-bottom: 25px;
+        background: transparent;
+        border: 2px solid #f5f5dc;
+        outline: none;
+        border-radius: 11px;
+        cursor: pointer;
+        font-size: 1.1em;
+        color: #f5f5dc;
+        transition: .5s;
+    }
+
+        .navigation-menu .room-btn:hover {
+            background: #f5f5dc;
+            color: #6e2300;
+        }
+
+
+.reservation {
+    position: fixed;
+    width: 900px;
+    height: 400px;
+    margin-top: 150px;
+    margin-left: 270px;
+    border: 2px solid #f5f5dc;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+}
+
+    .reservation.active {
+        transform: scale(1);
+    }
+
+    .reservation .icon-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45px;
+        height: 45px;
+        background: #f5f5dc;
+        font-size: 2em;
+        color: #6e2300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 16px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+.heading {
+    color: #f5f5dc;
+    margin-left: 20px;
+    position: absolute;
+    margin-top: 10px;
+    font-size: 30px;
+    font-family: Arial;
+    text-decoration: underline;
+}
+
+.reservation-form {
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 860px;
+    height: 340px;
+}
+
+.reserve-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 130px;
+    height: 45px;
+    background: #f5f5dc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #6e2300;
+    font-weight: 500;
+}
+
+    .reserve-btn:hover {
+        border: 2px solid #6e2300;
+    }
+
+.first-name {
+    position: absolute;
+    left: 0;
+    margin-top: 55px;
+    color: #f5f5dc;
+    font-family: Arial;
+    font-size: 20px;
+}
+
+.input-name {
+    border: 2px solid #f5f5dc;
+    background: #f5f5dc;
+    border-radius: 2px;
+    position: absolute;
+    left: 0;
+    margin-top: 80px;
+    color: #6e2300;
+    font-size: 15px;
+}
+
+.last-name {
+    position: absolute;
+    margin-top: 55px;
+    margin-left: 300px;
+    color: #f5f5dc;
+    font-family: Arial;
+    font-size: 20px;
+}
+
+.input-last-name {
+    border: 2px solid #f5f5dc;
+    background: #f5f5dc;
+    border-radius: 2px;
+    position: absolute;
+    left: 0;
+    margin-top: 80px;
+    margin-left: 300px;
+    color: #6e2300;
+    font-size: 15px;
+}
+
+
+.check-in {
+    position: absolute;
+    margin-top: 155px;
+    left: 0;
+    color: #f5f5dc;
+    font-family: Arial;
+    font-size: 20px;
+}
+
+.input-check-in {
+    border: 2px solid #f5f5dc;
+    background: #f5f5dc;
+    border-radius: 2px;
+    position: absolute;
+    left: 0;
+    margin-top: 180px;
+    color: #6e2300;
+    font-size: 15px;
+}
+
+
+.check-out {
+    position: absolute;
+    margin-top: 155px;
+    color: #f5f5dc;
+    font-family: Arial;
+    font-size: 20px;
+    margin-left: 300px;
+}
+
+.input-check-out {
+    border: 2px solid #f5f5dc;
+    background: #f5f5dc;
+    border-radius: 2px;
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 300px;
+    color: #6e2300;
+    font-size: 15px;
+}
+
+.phone {
+    position: absolute;
+    margin-top: 55px;
+    color: #f5f5dc;
+    font-family: Arial;
+    font-size: 20px;
+    margin-left: 600px;
+}
+
+
+
+
+.input-phone {
+    border: 2px solid #f5f5dc;
+    background: #f5f5dc;
+    border-radius: 2px;
+    position: absolute;
+    left: 0;
+    margin-top: 80px;
+    margin-left: 600px;
+    color: #6e2300;
+    font-size: 15px;
+}
+
+
+.room-id {
+    position: absolute;
+    left: 0;
+    margin-top: 255px;
+    color: #f5f5dc;
+    font-family: Arial;
+    font-size: 20px;
+}
+
+.input-room-id {
+    border: 2px solid #f5f5dc;
+    background: #f5f5dc;
+    border-radius: 2px;
+    position: absolute;
+    left: 0;
+    margin-top: 280px;
+    color: #6e2300;
+    font-size: 15px;
+    width: 60px;
+}
+
+
+
+.settings {
+    position: fixed;
+    width: 1150px;
+    height: 400px;
+    margin-top: 150px;
+    margin-left: 270px;
+    border: 2px solid #f5f5dc;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+    overflow:hidden;
+    font-family: Arial;
+}
+
+    .settings.active {
+        transform: scale(1);
+    }
+
+    .settings .icon-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45px;
+        height: 45px;
+        background: #f5f5dc;
+        font-size: 2em;
+        color: #6e2300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 16px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+
+.update-btn, .delete-btn, .available-btn {
+    background: #f5f5dc;
+    color: #6e2300;
+    border: none;
+    height: 35px;
+    font-size: 16px;
+    font-family: Arial;
+    border-radius: 6px;
+    transition: .7s;
+}
+
+    .delete-btn:hover {
+        background: #6e2300;
+        color: #f5f5dc;
+    }
+
+    .update-btn:hover {
+        background: #6e2300;
+        color: #f5f5dc;
+    }
+
+    .available-btn:hover {
+        background: #6e2300;
+        color: #f5f5dc;
+    }
+
+
+.room {
+    position: relative;
+    width: 1250px;
+    height: 400px;
+    margin-top: 150px;
+    margin-left: 270px;
+    border: 2px solid #f5f5dc;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+    font-family: Arial;
+    overflow: hidden;
+}
+
+
+
+
+    .room.active {
+        transform: scale(1);
+    }
+
+
+
+
+    .room .icon-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45px;
+        height: 45px;
+        background: #f5f5dc;
+        font-size: 2em;
+        color: #6e2300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+
+.table {
+    position: absolute;
+    width: 100%;
+    background-color: #f5f5dc;
+}
+
+.table-body {
+    overflow-y: scroll;
+    max-height: calc(100% - 45px);
+    height: 355px;
+}
+
+.row-header {
+    height: 45px;
+    overflow: hidden;
+    
+}
+
+
+.row-header,
+.row {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+.cell {
+    flex: 1;
+    padding: 5px;
+    text-align: left;
+    
+}
+
+.row-header .cell {
+    font-weight: bold;
+    background-color: #6e2300;
+    font-family: Arial;
+    font-size: 0.78em;
+    color: #f5f5dc;
+}
+
+.row:hover {
+    background-color: #ddd;
+}
+
+::-webkit-scrollbar {
+    width: 0.70em;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7d8594;
+    border-radius: 6px;
+}
+
+.room {
+    position: fixed;
+    width: 1200px;
+    height: 400px;
+    margin-top: 150px;
+    margin-left: 270px;
+    border: 2px solid #f5f5dc;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+}
+
+    .room.active {
+        transform: scale(1);
+    }
+
+
+    .room .icon-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45px;
+        height: 45px;
+        background: #f5f5dc;
+        font-size: 2em;
+        color: #6e2300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 16px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+.error-message {
+    color: rgb(146, 2, 2);
+    font-weight: bold;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 5s ease-in-out, visibility 5s ease-in-out;
+    position: absolute;
+    margin-top: 10px;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    width: 225px;
+    background-color: rgb(254, 0, 0);
+    border-radius: 3px;
+}
+
+.hide-error-message {
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+    width: 225px;
+    border-radius: 3px;
+}
+
+
+.success-message {
+    color: rgb(1, 101, 1);
+    font-weight: bold;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 5s ease-in-out, visibility 5s ease-in-out;
+    position: absolute;
+    margin-top: 10px;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    width: 550px;
+    background-color: rgb(115, 255, 0);
+    border-radius: 3px;
+}
+
+.hide-success-message {
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+    width: 550px;
+    border-radius: 3px;
+}
+
+
+
+
+
+.update-reservation {
+    position: fixed;
+    width: 850px;
+    height: 400px;
+    margin-top: 150px;
+    margin-left: 270px;
+    border: 2px solid #f5f5dc;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+}
+
+.update-reservation.active {
+    transform: scale(1);
+}
+
+    .update-reservation .icon-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45px;
+        height: 45px;
+        background: #f5f5dc;
+        font-size: 2em;
+        color: #6e2300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+
+
+
+.update-reservation-form {
+    position: absolute;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 810px;
+    height: 340px;
+}
+
+.input-reservation {
+    margin-left: 300px;
+    margin-top: 12px;
+    background: transparent;
+    border: none;
+    color: #f5f5dc;
+    font-family: Arial;
+    font-size: 30px;
+    pointer-events: none;
+}
+
+
+.confirm-update-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 130px;
+    height: 45px;
+    background: #f5f5dc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #6e2300;
+    font-weight: 500;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+
+.update-error-message {
+    color: rgb(146, 2, 2);
+    font-weight: bold;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 5s ease-in-out, visibility 5s ease-in-out;
+    position: absolute;
+    margin-top: 85px;
+    margin-left: 380px;
+    transform: translate(-50%);
+    text-align: center;
+    width: 225px;
+    line-height: normal;
+    background-color: rgb(254, 0, 0);
+    border-radius: 3px;
+}
+
+.hide-update-error-message {
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+    width: 225px;
+    border-radius: 3px;
+}
+
+.update-success-message {
+    color: rgb(1, 101, 1);
+    font-weight: bold;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 5s ease-in-out, visibility 5s ease-in-out;
+    position: absolute;
+    margin-top: 85px;
+    margin-left: 380px;
+    transform: translate(-50%);
+    text-align: center;
+    width: 170px;
+    background-color: rgb(115, 255, 0);
+    border-radius: 3px;
+}
+
+.hide-update-success-message {
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+    width: 170px;
+    border-radius: 3px;
+}
+
+
+.available {
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 270px;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 350px;
+    border: 2px solid #f5f5dc;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+}
+
+    .available.active {
+        transform: scale(1);
+    }
+
+    .available .icon-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45px;
+        height: 45px;
+        background: #f5f5dc;
+        font-size: 2em;
+        color: #6e2300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 16px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+.content {
+    position: absolute;
+    font-family: Arial;
+    color: #f5f5dc;
+    text-align: left;
+    left: 42%;
+    top: 25%;
+    transform: translate(-42%, -25%);
+}
+
+.content h1 {
+    text-decoration: underline;
+}
+
+
+
+
+
+.guide-wrapper {
+    position: absolute;
+    height: 500px;
+    width: 750px;
+    margin-top: 150px;
+    margin-left: 450px;
+    transform: scale(1);
+    transition: transform .5s ease, height .2s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+}
+
+.first-step {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    height: 245px;
+    width: 362.5px;
+    border: #fff solid;
+    border-radius: 50px;
+    transition: transform 0.3s;
+    font-family: Arial;
+    backdrop-filter: blur(10px);
+}
+
+    .first-step h2 {
+        position: relative;
+        margin-left: 120px;
+        color: #f5f5dc;
+        font-family: Arial;
+    }
+
+    .first-step:hover {
+        transform: scale(1.3); 
+        z-index: 1;
+    }
+
+    .first-step p {
+        transition: transform 0.3s;
+        color: #f5f5dc;
+    }
+
+    .first-step:hover p {
+        transform: scale(1.05); 
+    }
+
+.second-step {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 245px;
+    width: 362.5px;
+    border: #fff solid;
+    border-radius: 50px;
+    transition: transform 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+    .second-step h2 {
+        position: relative;
+        margin-left: 110px;
+        color: #f5f5dc;
+        font-family: Arial;
+    }
+
+    .second-step:hover {
+        transform: scale(1.3);
+        z-index: 1;
+    }
+
+    .second-step p {
+        transition: transform 0.3s;
+        color: #f5f5dc;
+    }
+
+    .second-step:hover p {
+        transform: scale(1.05);
+    }
+
+.third-step {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    height: 230px;
+    width: 362.5px;
+    border: #fff solid;
+    border-radius: 50px;
+    transition: transform 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+    .third-step h2 {
+        position: relative;
+        margin-left: 100px;
+        color: #f5f5dc;
+        font-family: Arial;
+    }
+
+    .third-step:hover {
+        transform: scale(1.3);
+        z-index: 1;
+    }
+
+    .third-step p {
+        transition: transform 0.3s;
+        color: #f5f5dc;
+    }
+
+    .third-step:hover p {
+        transform: scale(1.05);
+    }
+
+
+.fourth-step {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    height: 230px;
+    width: 362.5px;
+    border: #fff solid;
+    border-radius: 50px;
+    transition: transform 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+    .fourth-step h2 {
+        position: relative;
+        margin-left: 90px;
+        color: #f5f5dc;
+        font-family: Arial;
+    }
+
+    .fourth-step:hover {
+        transform: scale(1.3);
+        z-index: 1;
+    }
+
+    .fourth-step p {
+        transition: transform 0.3s;
+        color: #f5f5dc;
+    }
+
+    .fourth-step:hover p {
+        transform: scale(1.05);
+    }
+
+.guide-text {
+    position: absolute;
+    text-align: center;
+    font-family: Arial;
+    color: #fff;
+    left: 5px;
+    right: 5px;
+    top: 60px;
+}
+
+
+.guide-wrapper.hidden {
+    transform: scale(0);
+}

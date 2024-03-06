@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/_LayoutHome.cshtml";
+}
+
+<header>
+
+    <nav class="navigation">
+
+        <a href="/Account/Home">Home</a>
+        <a href="/Account/About">About</a>
+        <a href="/Account/Contact">Contact</a>
+        
+        <button class="btnLogin-popup">Login</button>
+
+    </nav>
+
+</header>
+
+<div class="content">
+    <h1>NEED A HOTEL ROOM?</h1>
+    <p> Click the button in the top right corner to login or register and then reserve your room</p>
+</div>
+
+
+<div class="wrapper @(TempData["LoginErrorMessage"] != null ? "active-popup" : "") || @(TempData["RegisterErrorMessage"] != null ? "active-popup active form-box register" : "")">
+
+    <span class="icon-close">
+
+        <ion-icon name="close-outline"></ion-icon>
+
+    </span>
+
+    <div class="form-box login @(TempData["LoginErrorMessage"] != null ? "active" : "")">
+
+        <h2>Login</h2>
+
+        <form action="Login" method="post">
+
+            <div class="input-box">
+
+                <span class="icon"> <ion-icon name="mail"></ion-icon> </span>
+                <input type="email" required name="User_Email" autocomplete="off"/>
+                <label>Email</label>
+
+            </div>
+
+            <div class="input-box">
+
+                <span class="icon"> <ion-icon name="lock-closed"></ion-icon> </span>
+                <input type="password" required name="User_Password" />
+                <label>Password</label>
+
+            </div>
+
+            <div class="remember-forgot">
+
+                <label> <input type="checkbox" />Remember Me</label>
+                <a href="#">Forgot password?</a>
+
+            </div>
+
+            @if (TempData["LoginErrorMessage"] != null)
+            {
+                <div class="error-message">
+                    @TempData["LoginErrorMessage"]
+                </div>
+
+            }
+
+            <button type="submit" class="btn">Login</button>
+
+            <div class="login-register">
+                <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+    <div class="form-box register @(TempData["RegisterErrorMessage"] != null ? "active" : "")">
+
+        <h2>Registration</h2>
+
+        <form action="Register" method="post">
+
+            <div class="input-box">
+
+                <span class="icon"> <ion-icon name="mail"></ion-icon> </span>
+                <input type="email" required name="User_Email"  autocomplete="off"/>
+                <label>Email</label>
+
+            </div>
+
+            <div class="input-box">
+
+                <span class="icon"> <ion-icon name="lock-closed"></ion-icon> </span>
+                <input type="password" required name="User_Password" />
+                <label>Password</label>
+
+            </div>
+
+
+
+            <div class="input-box">
+
+                <span class="icon"> <ion-icon name="lock-closed"></ion-icon> </span>
+                <input type="password" required name="User_ConfirmPassword" />
+                <label>Confirm Password</label>
+
+            </div>
+
+            <div class="remember-forgot">
+
+                <label> <input type="checkbox" />I agree to the terms & conditions</label>
+
+            </div>
+
+            @if (TempData["RegisterErrorMessage"] != null)
+            {
+                <div class="error-message">
+                    @TempData["RegisterErrorMessage"]
+                </div>
+            }
+
+
+            <button type="submit" class="btn">Register</button>
+
+            <div class="login-register">
+
+                <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="~/Java Script/scriptHome.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+

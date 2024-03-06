@@ -1,0 +1,538 @@
+﻿
+@{
+    ViewBag.Title = "Welcome";
+    Layout = "~/Views/_LayoutWelcome.cshtml";
+}
+
+@model Hotel_Booking_System_Web.Models.WelcomeModel
+
+
+
+<header>
+    <div class="wlc">
+        <h1>Welcome, @ViewBag.UserEmail!</h1>
+        <a class="logout-btn" href="@Url.Action("Logout", "Account")" >LogOut</a>
+
+    </div>
+
+
+
+</header>
+
+
+<div class="guide-wrapper @(TempData["ReservationErrorMessage"] != null ? "hidden" : "") || @(TempData["ReservationSucessMessage"] != null ? "hidden" : "") || @(TempData["DeleteMessage"] != null ? "hidden" : "") || @(TempData["ReservationUpdateErrorMessage"] != null ? "hidden" : "") || @(TempData["ReservationUpdateSuccessMessage"] != null ? "hidden" : "") || @(TempData["FilteredReservations"] != null ? "hidden" : "")">
+
+    <div class="first-step">
+        <h2>Find room</h2>
+        <span class="guide-text"><p>First click on the menu button Room and see room specifications and dates when room is already reserved. Then You can plan Your reservation date.</p></span>
+    </div>
+
+    <div class="second-step">
+        <h2>Reserve room</h2>
+        <span class="guide-text"><p>Find your room and then on the menu button Reservation reserve your room.</p></span>
+    </div>
+
+    <div class="third-step">
+        <h2>Get notification</h2>
+        <span class="guide-text"><p>If You become message "Success" you can see your reservation in My Reservations. If You become message "Already reserved" you can not reserve room with this room number in date which you was selected.</p></span>
+    </div>
+
+    <div class="fourth-step">
+        <h2>Update & Delete</h2>
+        <span class="guide-text"><p> If You become Success message in Reservation You can se your reservation in Settings and then you can Delete or Update Your reservation.</p></span>
+    </div>
+
+</div>
+
+<div class="menu">
+
+    <h1>Menu</h1>
+
+    <nav class="navigation-menu">
+
+
+
+
+
+        <button class="room-btn">Room</button>
+        <button class="reservation-btn">Reservation</button>
+        <button class="settings-btn">My Reservations</button>
+
+
+
+    </nav>
+</div>
+
+
+
+@if (TempData["ReservationUpdateErrorMessage"] != null)
+{
+    <div class="update-error-message" id="reservationUpdateErrorMessage">
+        @TempData["ReservationUpdateErrorMessage"]
+    </div>
+
+}
+
+
+@if (TempData["ReservationUpdateSuccessMessage"] != null)
+{
+    <div class="update-success-message" id="reservationUpdateSuccessMessage">
+        @TempData["ReservationUpdateSuccessMessage"]
+    </div>
+
+}
+
+
+<!--<div class="content">
+    <h1>Guide</h1>
+    <h2>Reserve</h2>
+    <p> You can reserve your room to click on menu button reservation</p>
+    <h2>All rooms we have</h2>
+    <p> If You click on menu button rooms You can see all rooms we have</p>
+    <h2> Change or Delete Your Reservation</h2>
+    <p> If You need to Change or Delete Your reservation You can do it if you click on the menu button settings and then you need to select which one reservation You want to Change or Delete.</p>
+</div>-->
+
+
+
+
+<div class="reservation @(TempData["ReservationErrorMessage"] != null ? "active" : "") || @(TempData["ReservationSucessMessage"] != null ? "active" : "")">
+    <span class="icon-close">
+        <ion-icon name="close-outline"></ion-icon>
+    </span>
+
+    <span class="heading">Reservation</span>
+    <form action="Reserve" method="post">
+
+
+        <div class="reservation-form">
+            <button class="reserve-btn">Reserve</button>
+
+            <p class="first-name">First Name:</p>
+            <input class="input-name" type="text" required name="First_Name" autocomplete="off">
+            <p class="last-name">Last Name:</p>
+            <input class="input-last-name" type="text" required name="Last_Name" autocomplete="off">
+
+
+            <p class="check-in">Check-In:</p>
+            <input class="input-check-in" id="check-in" name="Check_In" type="date" required>
+
+            <p class="check-out">Check-Out:</p>
+            <input class="input-check-out" id="check-out" name="Check_Out" type="date" required>
+
+
+            <p class="phone">Phone:</p>
+            <input class="input-phone" name="Phone" autocomplete="off">
+
+
+            <p class="room-id">Room:</p>
+            <select class="input-room-id" name="Room" autocomplete="off">
+                @if (Model.Rooms != null)
+                {
+                    foreach (var room in Model.Rooms)
+                    {
+                        <option>@room.Room_Id</option>
+                    }
+                }
+
+
+            </select>
+
+            @if (TempData["ReservationErrorMessage"] != null)
+            {
+                <div class="error-message" id="reservationErrorMessage">
+                    @TempData["ReservationErrorMessage"]
+                </div>
+
+            }
+
+            else
+            {
+                <div class="success-message" id="reservationSuccessMessage">
+                    @TempData["ReservationSucessMessage"]
+                </div>
+            }
+
+        </div>
+    </form>
+</div>
+
+
+
+<div class="settings @(TempData["DeleteMessage"] != null ? "active" : "") || @(TempData["ReservationUpdateErrorMessage"] != null ? "active" : "") || @(TempData["ReservationUpdateSuccessMessage"] != null ? "active" : "")">
+
+    <span class="icon-close">
+        <ion-icon name="close-outline"></ion-icon>
+    </span>
+
+
+    <!--<table class="table">
+        <tr>
+            <th>Reservation ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Room</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Total Price</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+
+        <tbody>
+            @if (Model.Reservations != null)
+            {
+                foreach (var reservation in Model.Reservations)
+                {
+                    <tr>
+
+                        <td> @reservation.Reservation_Id</td>
+                        <td> @reservation.First_Name </td>
+                        <td> @reservation.Last_Name</td>
+                        <td> @reservation.Check_In </td>
+                        <td> @reservation.Check_Out </td>
+                        <td> @reservation.Room</td>
+                        <td> @reservation.Phone </td>
+                        <td> @reservation.Email </td>
+                        <td> @reservation.Total_Price  </td>
+
+                        <form action="DeleteReservation" method="post">
+                            <input type="hidden" name="Reservation_Id" value="@reservation.Reservation_Id" />
+                        <td><button class="settings-button">Delete</button></td>
+                        </form>
+
+
+
+
+
+
+                        <td>
+                            <button class="settings-button" data-reservation-id="@reservation.Reservation_Id"
+                                    data-first-name="@reservation.First_Name"
+                                    data-last-name="@reservation.Last_Name"
+                                    data-phone="@reservation.Phone"
+                                    data-checkIn="@reservation.Check_In"
+                                    data-checkOut="@reservation.Check_Out"
+                                    data-room="@reservation.Room">
+                                Update
+                            </button>
+                        </td>
+
+
+
+
+                    </tr>
+                }
+            }
+
+
+        </tbody>
+    </table>-->
+
+
+    <div class="table">
+
+        <div class="row-header">
+            <div class="cell"> Reservation</div>
+            <div class="cell"> First Name </div>
+            <div class="cell"> Last Name</div>
+            <div class="cell"> Check In</div>
+            <div class="cell"> Check Out</div>
+            <div class="cell"> Room</div>
+            <div class="cell"> Phone</div>
+            <div class="cell"> Email </div>
+            <div class="cell"> Total Price </div>
+            <div class="cell"> Delete </div>
+            <div class="cell"> Update </div>
+        </div>
+
+
+
+        <div class="table-body">
+
+            @if (Model.Reservations != null)
+            {
+                foreach (var reservation in Model.Reservations)
+                {
+
+
+                    <div class="row">
+
+                        <div class="cell" data-title="Reservation"> @reservation.Reservation_Id</div>
+
+                        <div class="cell" data-title="First Name"> @reservation.First_Name</div>
+
+                        <div class="cell" data-title="Last Name">@reservation.Last_Name</div>
+
+                        <div class="cell" data-title="Check In"> @reservation.Check_In.ToString("dd.MM.yyyy")</div>
+
+                        <div class="cell" data-title="Check Out"> @reservation.Check_Out.ToString("dd.MM.yyyy")</div>
+
+                        <div class="cell" data-title="Room"> @reservation.Room</div>
+
+                        <div class="cell" data-title="Phone"> @reservation.Phone</div>
+
+                        <div class="cell" data-title="Email"> @reservation.Email</div>
+
+                        <div class="cell" data-title="Total Price"> @reservation.Total_Price</div>
+
+                        <form action="DeleteReservation" method="post">
+
+                            <input type="hidden" name="Reservation_Id" value="@reservation.Reservation_Id" />
+                            <div class="cell"><button class="delete-btn">Delete</button></div>
+                        </form>
+
+                        <div class="cell">
+                            <button class="update-btn" data-reservation-id="@reservation.Reservation_Id"
+                                    data-first-name="@reservation.First_Name"
+                                    data-last-name="@reservation.Last_Name"
+                                    data-phone="@reservation.Phone"
+                                    data-checkIn="@reservation.Check_In"
+                                    data-checkOut="@reservation.Check_Out"
+                                    data-room="@reservation.Room">
+                                Update
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                }
+            }
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="update-reservation">
+
+    <span class="icon-close">
+        <ion-icon name="close-outline"></ion-icon>
+    </span>
+
+
+
+    <span class="heading">Update Reservation: </span>
+    <input class="input-reservation" id="reservationIdShow" readonly />
+
+    <form action="UpdateReservation" method="post">
+
+        <div class="update-reservation-form">
+
+            <input type="hidden" id="reservationId" name="Reservation_Id" />
+
+            <button class="confirm-update-btn">Confirm Update</button>
+
+            <p class="first-name">First Name:</p>
+            <input class="input-name" id="reservationFirstName" name="First_Name" />
+            <p class="last-name">Last Name:</p>
+            <input class="input-last-name" id="reservationLastName" name="Last_Name" />
+
+
+            <p class="check-in">Check-In:</p>
+            <input class="input-check-in" id="reservationCheckIn" name="Check_In" type="date" />
+
+            <p class="check-out">Check-Out:</p>
+            <input class="input-check-out" id="reservationCheckOut" name="Check_Out" type="date" />
+
+
+            <p class="phone">Phone:</p>
+            <input class="input-phone" id="reservationPhone" name="Phone" />
+
+
+            <p class="room-id">Room:</p>
+
+            <select class="input-room-id" id="reservationRoom" name="Room" autocomplete="off">
+                @if (Model.Rooms != null)
+                {
+                    foreach (var room in Model.Rooms)
+                    {
+                        <option value="@room.Room_Id">@room.Room_Id</option>
+                    }
+                }
+
+
+            </select>
+
+
+
+
+        </div>
+
+    </form>
+</div>
+
+<div class="room">
+    <span class="icon-close">
+        <ion-icon name="close-outline"></ion-icon>
+    </span>
+
+
+
+    <div class="table">
+
+        <div class="row-header">
+            <div class="cell"> Room</div>
+            <div class="cell"> Floor </div>
+            <div class="cell"> Beds </div>
+            <div class="cell"> WiFi</div>
+            <div class="cell"> Air Condition</div>
+            <div class="cell"> Balcony</div>
+            <div class="cell"> Terrace </div>
+            <div class="cell"> Pet Friendly </div>
+            <div class="cell"> Room Service</div>
+            <div class="cell"> Price </div>
+            <div class="cell"> Available </div>
+        </div>
+
+
+        <div class="table-body">
+
+            @if (Model.Rooms != null)
+            {
+                foreach (var room in Model.Rooms)
+                {
+
+
+                    <div class="row">
+                        <div class="cell" data-title="Room"> @room.Room_Id</div>
+                        <div class="cell" data-title="Floor"> @room.Floor</div>
+                        <div class="cell" data-title="Beds">@room.Bed_Count </div>
+                        <div class="cell" data-title="WiFi"> @room.WiFi</div>
+                        <div class="cell" data-title="Air Condition"> @room.Air_Condition</div>
+                        <div class="cell" data-title="Balcony"> @room.Balcony</div>
+                        <div class="cell" data-title="Terrace"> @room.Terrace</div>
+                        <div class="cell" data-title="Pet Friendly"> @room.Pet_Friendly</div>
+                        <div class="cell" data-title="Room Service"> @room.Room_Service</div>
+                        <div class="cell" data-title="Price"> @room.Price_Per_Day</div>
+
+
+
+
+
+                        <form action="SeeAvailability" method="post">
+
+                            <input type="hidden" name="Room_Id" value="@room.Room_Id" />
+                            <div class="cell">
+                                <button name="submitBtn" class="available-btn" data-room-id="@room.Room_Id">Already reserved</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                }
+            }
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="available @(TempData["FilteredReservations"] != null ? "active" : "")">
+
+    <span class="icon-close">
+        <ion-icon name="close-outline"></ion-icon>
+    </span>
+
+
+    <div class="table">
+
+        <div class="row-header">
+
+            <div class="cell"> Room</div>
+            <div class="cell"> Check In</div>
+            <div class="cell"> Check Out</div>
+
+
+        </div>
+
+
+
+        <div class="table-body">
+
+            @if (TempData["FilteredReservations"] != null)
+            {
+                var filteredReservations = TempData["FilteredReservations"] as List<Hotel_Booking_System_Web.Models.Reservations>;
+
+                if (filteredReservations != null)
+                {
+                    foreach (var reservation in filteredReservations)
+                    {
+                        <div class="row">
+                            <div class="cell" data-title="Room">  @reservation.Room </div>
+                            <div class="cell" data-title="Check In"> @reservation.Check_In.ToString("yyyy.dd.MM")</div>
+                            <div class="cell" data-title="Check Out"> @reservation.Check_Out.ToString("yyyy.dd.MM")</div>
+                        </div>
+                    }
+                }
+
+            }
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<script src="~/Java Script/scriptWelcome.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+
+<!--<table class="table">
+    <tr>
+        <th>Room</th>
+        <th>Beds</th>
+        <th>WiFi</th>
+        <th>Balcony</th>
+        <th>Terrace</th>
+        <th>Smart TV</th>
+        <th>Pet Friendly</th>
+        <th>Room Service</th>
+        <th>Air Condition</th>
+        <th>Floor</th>
+        <th>Price Per Day</th>
+    </tr>
+
+    <tbody>
+        @if (Model.Rooms != null)
+        {
+            foreach (var room in Model.Rooms)
+            {
+                <tr>
+                    <td>@room.Room_Id </td>
+                    <td>@room.Bed_Count</td>
+                    <td>@room.WiFi</td>
+                    <td>@room.Balcony</td>
+                    <td>@room.Terrace</td>
+                    <td>@room.Smart_TV</td>
+                    <td>@room.Pet_Friendly</td>
+                    <td>@room.Room_Service</td>
+                    <td>@room.Air_Condition</td>
+                    <td>@room.Floor</td>
+                    <td>@room.Price_Per_Day</td>
+
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>-->
